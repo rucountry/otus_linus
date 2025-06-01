@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtusEduWebApi", "OtusEduWebApi.csproj", "{793F5384-45F5-4BE4-B6D0-7A1065A393A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OtusEduAngular", "OtusEduAngular", "{43AFFC57-A44C-4A43-9F75-EA82A16CA363}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{793F5384-45F5-4BE4-B6D0-7A1065A393A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793F5384-45F5-4BE4-B6D0-7A1065A393A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793F5384-45F5-4BE4-B6D0-7A1065A393A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793F5384-45F5-4BE4-B6D0-7A1065A393A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
