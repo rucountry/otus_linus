@@ -51,18 +51,18 @@ app.MapGet("/products/{id}", async (int id, AppDbContext db) =>
         ? Results.Ok(product) 
         : Results.NotFound());
 
-app.MapPost("/products", async (ProductEntity product, AppDbContext db) =>
+app.MapPost("/products", async (ProductEntity product, AppDbContext db, HttpContext context) =>
 {
     if (string.IsNullOrEmpty(product.Name) || product.Price <= 0)
         return Results.BadRequest("Invalid product data");
-    product.Host = Helper.GetLocalIPAddress();
+    product.Host = context.Request.Headers["X-Backend-Server"];
     product.Id = new Random().Next(1,10000);
     db.Products.Add(product);
     await db.SaveChangesAsync();
     return Results.Created($"/products/{product.Id}", product);
 });
 
-app.MapPut("/products/{id}", async (int id, ProductEntity updatedProduct, AppDbContext db) =>
+app.MapPut("/products/{id}", async (int id, ProductEntity updatedProduct, AppDbContext db, HttpContext context) =>
 {
     if (id != updatedProduct.Id)
         return Results.BadRequest("ID mismatch");
@@ -72,7 +72,7 @@ app.MapPut("/products/{id}", async (int id, ProductEntity updatedProduct, AppDbC
     
     existingProduct.Name = updatedProduct.Name;
     existingProduct.Price = updatedProduct.Price;
-    existingProduct.Host = Helper.GetLocalIPAddress();
+    existingProduct.Host = context.Request.Headers["X-Backend-Server"];
     
     await db.SaveChangesAsync();
     return Results.Ok(existingProduct);
