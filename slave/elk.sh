@@ -17,7 +17,7 @@ echo "$(java --version)"
 
 #Установка Elastiksearch
 if ! sudo systemctl is-enabled elasticsearch &>/dev/null; then
-#sudo dpkg -i elasticsearch-8.9.1-amd64.deb 
+#sudo dpkg -i /home/rasim/otus/elasticsearch-8.9.1-amd64.deb 
 echo "Установка elasticsearch прошла успешно"
 fi
 
@@ -59,7 +59,7 @@ sudo systemctl enable --now elasticsearch.service
 
 #Установка kibana
 if ! sudo systemctl is-enabled kibana &>/dev/null; then
-#sudo dpkg -i kibana-8.9.1-amd64.deb
+#sudo dpkg -i /home/rasim/otus/kibana-8.9.1-amd64.deb
 echo "Установка kibana прошла успешно"
 fi
 
@@ -86,7 +86,7 @@ sudo systemctl restart kibana.service
 
 #Установка logstash
 if ! sudo systemctl is-enabled logstash &>/dev/null; then
-#sudo dpkg -i logstash-8.9.1-amd64.deb
+#sudo dpkg -i /home/rasim/otus/logstash-8.9.1-amd64.deb
 echo "Установка logstash прошла успешно"
 fi
 
