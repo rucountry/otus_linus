@@ -1,0 +1,77 @@
+<!-- app.component.html -->
+<div class="container mt-4">
+    <h2 class="mb-4">Список продуктов</h2>
+
+    <!-- Add Product Button -->
+    <button class="btn btn-success mb-3" (click)="startAdd()">
+        Добавить новый продукт
+    </button>
+
+    <!-- Product Form -->
+    <div *ngIf="showForm" class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ isEditing ? 'Редактировать' : 'Новый продукт' }}</h5>
+            <form #productForm="ngForm" (ngSubmit)="submitForm()">
+                <div class="mb-3">
+                    <label class="form-label">Название</label>
+                    <input type="text" class="form-control"
+                           [(ngModel)]="selectedProduct.name"
+                           name="name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Цена</label>
+                    <input type="number" class="form-control"
+                           [(ngModel)]="selectedProduct.price"
+                           name="price" required step="0.01">
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary"
+                            [disabled]="!productForm.valid">
+                        {{ isEditing ? 'Обновить' : 'Создать' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary"
+                            (click)="cancelEdit()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product List -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Сервер</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price | currency }}</td>
+                <td>{{ product.host }}</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-primary"
+                                (click)="startEdit(product)">
+                            Редактировать
+                        </button>
+                        <button class="btn btn-sm btn-danger"
+                                (click)="deleteProduct(product.id)">
+                            Удалить
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
