@@ -44,7 +44,7 @@ sudo systemctl status prometheus
 
 if ! command -v grafana &> /dev/null; then
  sudo apt install -y adduser libfontconfig1
- sudo dpkg -i grafana_10.0.3_amd64.deb
+ sudo dpkg -i /home/rasim/otus/grafana_10.0.3_amd64.deb
  echo 'Grafana установлена'
 fi
  
