@@ -19,7 +19,7 @@ sudo apt-get install -y dotnet-sdk-8.0
 sudo apt-get install -y prometheus-node-exporter
 
 # Копируем проект в рабочую директорию (если скрипт запускается из репозитория)
-cp -r /home/rasim/otus/OtusEduWebApi/* $PROJECT_DIR
+cp -r /home/rasim/otus_linus/OtusEduWebApi/* $PROJECT_DIR
 cd $PROJECT_DIR
 
 # Восстановление зависимостей

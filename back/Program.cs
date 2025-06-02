@@ -70,9 +70,16 @@ app.MapPut("/products/{id}", async (int id, ProductEntity updatedProduct, AppDbC
     var existingProduct = await db.Products.FindAsync(id);
     if (existingProduct is null) return Results.NotFound();
     
+    var backendServer = context.Request.Headers["X-Backend-Server"];
+
+    if (string.IsNullOrEmpty(backendServer))
+    {
+       backendServer = "Header not set";
+    }
+
     existingProduct.Name = updatedProduct.Name;
     existingProduct.Price = updatedProduct.Price;
-    existingProduct.Host = context.Request.Headers["X-Backend-Server"];
+    existingProduct.Host = backendServer; //context.Request.Headers["X-Backend-Server"];
     
     await db.SaveChangesAsync();
     return Results.Ok(existingProduct);
@@ -86,6 +93,14 @@ app.MapDelete("/products/{id}", async (int id, AppDbContext db) =>
     db.Products.Remove(product);
     await db.SaveChangesAsync();
     return Results.NoContent();
+});
+app.MapGet("/headers", (HttpContext ctx) =>
+{
+    return Results.Json(ctx.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()));
+});
+app.MapGet("/ping", (HttpContext ctx) =>
+{
+    return "pong";
 });
 app.UseCors("AllowAll");
 app.Run();
