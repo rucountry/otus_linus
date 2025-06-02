@@ -58,6 +58,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable $SERVICE_NAME
 sudo systemctl restart $SERVICE_NAME
+sudo systemctl restart prometheus-node-exporter
 
 echo "Проверка статуса:"
 sudo systemctl status $SERVICE_NAME
