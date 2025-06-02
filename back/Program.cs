@@ -94,11 +94,11 @@ app.MapDelete("/products/{id}", async (int id, AppDbContext db) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 });
-app.MapGet("/headers", (HttpContext ctx) =>
+app.MapGet("/products/headers", (HttpContext ctx) =>
 {
     return Results.Json(ctx.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()));
 });
-app.MapGet("/ping", (HttpContext ctx) =>
+app.MapGet("/products/ping", (HttpContext ctx) =>
 {
     return "pong";
 });
