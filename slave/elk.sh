@@ -55,7 +55,7 @@ EOL
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now elasticsearch.service
-
+sudo systemctl restart elasticsearch.service
 
 #Установка kibana
 if ! sudo systemctl is-enabled kibana &>/dev/null; then
