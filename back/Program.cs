@@ -55,7 +55,7 @@ app.MapPost("/products", async (ProductEntity product, AppDbContext db, HttpCont
 {
     if (string.IsNullOrEmpty(product.Name) || product.Price <= 0)
         return Results.BadRequest("Invalid product data");
-    product.Host = context.Request.Headers["X-Backend-Server"];
+    product.Host = context.Connection.LocalIpAddress?.ToString() ?? Helper.GetLocalIPAddress();
     product.Id = new Random().Next(1,10000);
     db.Products.Add(product);
     await db.SaveChangesAsync();
@@ -69,17 +69,10 @@ app.MapPut("/products/{id}", async (int id, ProductEntity updatedProduct, AppDbC
     
     var existingProduct = await db.Products.FindAsync(id);
     if (existingProduct is null) return Results.NotFound();
-    
-    var backendServer = context.Request.Headers["X-Backend-Server"];
-
-    if (string.IsNullOrEmpty(backendServer))
-    {
-       backendServer = "Header not set";
-    }
 
     existingProduct.Name = updatedProduct.Name;
     existingProduct.Price = updatedProduct.Price;
-    existingProduct.Host = backendServer; //context.Request.Headers["X-Backend-Server"];
+    existingProduct.Host = context.Connection.LocalIpAddress?.ToString() ?? Helper.GetLocalIPAddress();
     
     await db.SaveChangesAsync();
     return Results.Ok(existingProduct);
@@ -94,10 +87,17 @@ app.MapDelete("/products/{id}", async (int id, AppDbContext db) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 });
-app.MapGet("/products/headers", (HttpContext ctx) =>
+app.MapGet("/products/headers", (HttpContext context) =>
 {
-    return Results.Json(ctx.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()));
+    var headers = context.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString());
+
+
+    return Results.Json(new
+    {
+        ReceivedHeaders = headers
+    });
 });
+
 app.MapGet("/products/ping", (HttpContext ctx) =>
 {
     return "pong";
