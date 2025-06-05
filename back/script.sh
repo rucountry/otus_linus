@@ -13,9 +13,9 @@ sudo mkdir -p $PROJECT_DIR
 sudo chown -R $USER:$USER $PROJECT_DIR    # Даем права текущему пользователю
 
 # Установка зависимостей
-sudo apt-get update
-sudo apt-get install -y apt-transport-https
-sudo apt-get install -y dotnet-sdk-8.0
+#sudo apt-get update
+#sudo apt-get install -y apt-transport-https
+#sudo apt-get install -y dotnet-sdk-8.0
 sudo apt-get install -y prometheus-node-exporter
 
 # Копируем проект в рабочую директорию (если скрипт запускается из репозитория)

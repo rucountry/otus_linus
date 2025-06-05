@@ -4,7 +4,7 @@ PROMETHEUS_CONFIG="/etc/prometheus/prometheus.yml"
 
 # Обновление пакетов
 echo "Обновление пакетов..."
-sudo apt-get update -qq
+#sudo apt-get update -qq
 
 
 if ! command -v prometheus &> /dev/null; then

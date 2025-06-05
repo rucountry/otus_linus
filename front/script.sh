@@ -10,7 +10,7 @@ NGINX_CONFIG="/etc/nginx/sites-available/$PROJECT_NAME"
 
 # Обновление пакетов
 echo "Обновление пакетов..."
-sudo apt-get update -qq
+#sudo apt-get update -qq
 sudo apt-get install -y prometheus-node-exporter
 
 # Удаление nodejs и конфликтующих пакетов

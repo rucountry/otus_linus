@@ -13,7 +13,7 @@ user_exists() {
 
 #Установка MySQL
 echo "Обновление пакетов..."
-sudo apt update -qq
+#sudo apt update -qq
 if ! command -v mysql &> /dev/null; then
 sudo apt install mysql-server-8.0 -y
 sudo systemctl enable mysql
