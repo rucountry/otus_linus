@@ -118,3 +118,4 @@ sudo ln -sf "$NGINX_CONFIG" "/etc/nginx/sites-enabled/"
 echo "Restarting Nginx..."
 sudo nginx -t
 sudo systemctl restart nginx
+sudo systemctl restart prometheus-node-exporter
